@@ -1,7 +1,25 @@
 #Imports regular expression
 import re
 
+INPUT_FILE = "references.txt"
+
+# Read function
+def read_lines (filename):
+    with open(filename, "r", encoding = "utf-8") as f:
+        return f.readlines()
+
+# Write function
+def write_lines (filename, lines):
+    with open(filename, "w", encoding = "utf-8") as f:
+        f.writelines(lines)
+
+# Functions
+
+def remove_square_brackets (lines):
+    return 
+
 #This makes the raw citations have numbers preceding them
+    
 def numbering(input_file,output_file):
     #Opens and reads file
     with open(input_file, "r") as file:
@@ -39,7 +57,7 @@ def removequarebracket(input_file, output_file):
     #Prints the output file
     with open(output_file, 'w', encoding='utf-8') as file:
         file.write('\n'.join(reformatted))
-'''
+
 #Removes the numbers in front
 def noNumbers(input_file, output_file):
     with open(input_file, 'r', encoding='utf-8') as infile:
@@ -64,7 +82,6 @@ def noNumbers(input_file, output_file):
     with open(output_file, 'w', encoding='utf-8') as outfile:
         for entry in cleaned_entries:
             outfile.write(entry + '\n')
-'''
 
 # This is important
 #Remove fancy quotes unreadable by Python            
