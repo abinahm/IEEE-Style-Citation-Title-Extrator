@@ -13,7 +13,6 @@ I originally wrote this to pull titles out of CVs so I could cross-check them ag
 3. Paste the output into `references.txt`.
 4. Run the script: python Extractor.py
 
-##########
 ## Example
 
 **Input (`references.txt`):**
@@ -21,7 +20,7 @@ I originally wrote this to pull titles out of CVs so I could cross-check them ag
 
 **Output:**
 Deep learning for image recognition
-##########
+
 
 ## Tip
 
