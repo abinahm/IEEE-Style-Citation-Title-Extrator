@@ -1,8 +1,5 @@
 #Imports regular expression
 import re
-#Authors: Ahmad Faizuddin bin Ahmad Shahrir, Nidhi Krishna Kumar, Madeeha Iman Sohai Sadiq
-#Purpose of code: Make our life easier with Elements
-
 
 #This makes the raw citations have numbers preceding them
 def numbering(input_file,output_file):
