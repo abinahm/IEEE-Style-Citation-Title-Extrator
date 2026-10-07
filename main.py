@@ -1,5 +1,8 @@
 #Imports regular expression
 import re
+import tempfile
+import shutil
+import os
 
 INPUT_FILE = "references.txt"
 
@@ -12,8 +15,6 @@ def read_lines (filename):
 def write_lines (filename, lines):
     with open(filename, "w", encoding = "utf-8") as f:
         f.writelines(lines)
-
-# Functions
 
 def remove_square_brackets (lines):
     return 
@@ -95,7 +96,6 @@ def replaceQuotes(input_file, output_file):
     with open(output_file, 'w', encoding='utf-8') as f:
         f.write(content)
 
-# This is also important
 #IEEE citation after help from Co-Pilot
 def ieeeCitations(output_file, rearranged_file):
     count = 0
@@ -105,43 +105,49 @@ def ieeeCitations(output_file, rearranged_file):
             match = re.search(r'"([^"]+)"', line)
             if match:
                 title = match.group(1)
-                #Remove the title including the quotes from the original line
                 rest = line.replace(f'"{title}"', '').strip()
                 fout.write(f'{title} {rest}\n')
             else:
-                #No title found so the citation stays the same
                 fout.write(line)  
           
 def ieeeCitations2 (output_file,titleOnly):
-    
-    #Only outputs titles
     with open(output_file, "r") as fin, open(titleOnly, "w") as fout:
         for line in fin:
-            #Find the first thing inside quotes
             match = re.search(r'"([^"]+)"', line)
             if match:
-                #only saves the title
                 title = match.group(1).rstrip(',')    
-                #saves to output file
                 fout.write(title + "\n")    
             else:
-                #If no matches leave blank
-                fout.write("\n")                
+                fout.write("\n")   
 
-'''To use START HERE'''
-numbering('references.txt','NUMBERED.txt')
-removequarebracket('NUMBERED.txt', 'formatted.txt')
-noNumbers('formatted.txt', 'CLEAN.txt')
-replaceQuotes('CLEAN.txt', 'ieee.txt')
-ieeeCitations('ieee.txt','TITLEFRONT.txt')
-ieeeCitations2('ieee.txt','TITLEFONLY.txt')
+KEEP_INTERMEDIATE = False
 
-'''
-How to use (if you didn't read the manual):
-1. Input raw one line per citation into references.txt
-2. Use numbered.txt to send to Co-Pilot and ask to change citation style to IEEE style
-3. Copy from Co-Pilot, and paste to references.txt 
-4. Use TITLEFRONT.txt to compare and contrast in Elements by sorting A-Z, by pasting the results in the excel sheet
-'''
+if __name__ == "__main__":
+    work_dir = "intermediate_files" if KEEP_INTERMEDIATE else tempfile.mkdtemp()
+    os.makedirs(work_dir, exist_ok=True)
+
+    def p(name):
+        return os.path.join(work_dir, name)
+
+    numbering('references.txt', p('NUMBERED.txt'))
+    removequarebracket(p('NUMBERED.txt'), p('formatted.txt'))
+    noNumbers(p('formatted.txt'), p('CLEAN.txt'))
+    replaceQuotes(p('CLEAN.txt'), p('ieee.txt'))
+
+    ieeeCitations(p('ieee.txt'), 'TITLEFRONT.txt')
+    ieeeCitations2(p('ieee.txt'), 'TITLEONLY.txt'
+    if not KEEP_INTERMEDIATE:
+        shutil.rmtree(work_dir)
+
+    with open('TITLEONLY.txt', encoding='utf-8') as f:
+        titles = [line.strip() for line in f]
+
+        found = sum(1 for t in titles if t)
+        missing = [i for i, t in enumerate(titles, 1) if not t]
+
+        print(f"Done: {found}/{len(titles)} titles found.")
+    if missing:
+        print(f"No title found on lines: {missing}")
+        print("Saved to TITLEFRONT.txt and TITLEONLY.txt")
 
 
