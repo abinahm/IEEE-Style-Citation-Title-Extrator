@@ -18,10 +18,12 @@ I originally wrote this to pull titles out of CVs so I could cross-check them ag
 python3 Extractor.py references.txt
 
 references.txt would contain something like:
+
 [1] J. Smith and A. Lee, "Deep learning for image recognition," IEEE Trans. Pattern Anal., vol. 5, no. 2, pp. 10-20, 2020.
 
 **Output:**
 Deep learning for image recognition
+
 This would be shown in a text file called TITLEONLY.txt
 
 ## Tip
