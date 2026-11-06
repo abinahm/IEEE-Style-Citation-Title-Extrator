@@ -43,26 +43,22 @@ This tool extracts publication titles from IEEE-style citations in CVs and write
 them to an Excel sheet, replacing the manual copy/paste step used to hand out
 curation assignments to student workers.
 
-### Results (single curator, estimated hours)
+## Methodology
 
-| Period | Workflow | Hours | Publications reviewed | Pubs/hour | Min/pub | Speedup vs. manual |
-|---|---|---|---|---|---|---|
-| Spring 2025 | Manual | 180 | 119 | 0.66 | 90.8 | 1x |
-| Summer 2025 | Script (all-in, incl. development time) | 408 | 6,190 | 15.2 | 3.9 | 23x |
-| Fall 2025 | Script | 180 | 17,503 | 97.2 | 0.6 | 147x |
-| Spring 2026 | Script | 180 | 4,161 | 23.1 | 2.6 | 35x |
-| **Script-era pooled (excl. Fall 2025)** | Script | 588 | 10,351 | **17.6** | 3.4 | **~27x** |
+**Edits per hour = |Total After − Total Before| ÷ Hours worked**
+**Speedup = median(script-era edits/hour) ÷ manual edits/hour**
 
-Fall 2025 is excluded from the headline figure because it accounts for about 63% of
-all publications handled and likely reflects a few very large profiles.
+| Period | Workflow | Edits | Hours | Edits/hour |
+|---|---|---|---|---|
+| Spring 2025 | Manual | 80 | 180 | 0.44 |
+| Summer 2025 | Script | 2,042 | 408 | 5.0 |
+| Fall 2025 | Script | 14,633 | 180 | 81.3 |
+| Spring 2026 | Script | 1,275 | 180 | 7.1 |
+
+**Result: ~16x speedup** (median 7.1 vs. 0.44 edits/hour).
 
 ### Limitations
-
-- The manual baseline (Spring 2025) was my first semester, so it includes
-  training time and likely understates my steady-state manual speed.
-- Publication count depends on profile size, not only effort. Hours are estimated
-  from average weekly schedule, not time-tracked.
-- Figures describe one curator's throughput. A team-wide time-savings estimate
-  requires a timed comparison of manual vs. scripted title transfer (see below).
-
+- Hours are estimated from my average weekly schedule.
+- The manual baseline was my first semester, so it includes training time.
+- This is one person's throughput, not a team-wide measurement, but I was doing the title extraction for them (5 Student Workers)
 
